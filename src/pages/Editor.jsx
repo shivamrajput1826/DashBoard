@@ -1,48 +1,24 @@
 import React from "react";
 import {
-  GridComponent,
-  ColumnsDirective,
-  ColumnDirective,
-  Page,
-  Selection,
+  HtmlEditor,
+  Image,
   Inject,
-  Edit,
+  Link,
+  QuickToolbar,
+  RichTextEditorComponent,
   Toolbar,
-  Sort,
-  Filter,
-} from "@syncfusion/ej2-react-grids";
+} from "@syncfusion/ej2-react-richtexteditor";
 
-import { customersData, customersGrid } from "../data/dummy";
 import { Header } from "../components";
+import { EditorData } from "../data/dummy";
 
-const Customers = () => {
-  const selectionsettings = { persistSelection: true };
-  const toolbarOptions = ["Delete"];
-  const editing = { allowDeleting: true, allowEditing: true };
-
-  return (
-    <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-      <Header category="Page" title="Customers" />
-      <GridComponent
-        dataSource={customersData}
-        enableHover={false}
-        allowPaging
-        pageSettings={{ pageCount: 5 }}
-        selectionSettings={selectionsettings}
-        toolbar={toolbarOptions}
-        editSettings={editing}
-        allowSorting
-      >
-        <ColumnsDirective>
-          {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-          {customersGrid.map((item, index) => (
-            <ColumnDirective key={index} {...item} />
-          ))}
-        </ColumnsDirective>
-        <Inject services={[Page, Selection, Toolbar, Edit, Sort, Filter]} />
-      </GridComponent>
-    </div>
-  );
-};
-
-export default Customers;
+const Editor = () => (
+  <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
+    <Header category="App" title="Editor" />
+    <RichTextEditorComponent>
+      <EditorData />
+      <Inject services={[HtmlEditor, Toolbar, Image, Link, QuickToolbar]} />
+    </RichTextEditorComponent>
+  </div>
+);
+export default Editor;
